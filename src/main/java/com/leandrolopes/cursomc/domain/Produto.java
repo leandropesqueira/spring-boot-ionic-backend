@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Produto implements Serializable {
 	
@@ -24,6 +26,7 @@ public class Produto implements Serializable {
 	private String nome;
 	private Double preco;
 	
+	@JsonBackReference
 	@ManyToMany
 	@JoinTable(name= "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"),
 				inverseJoinColumns = @JoinColumn(name= "categoria_id"))
@@ -94,3 +97,4 @@ public class Produto implements Serializable {
 //name= "PRODUTO_CATEGORIA" = tabela que vai ficar entre categoria e produto
 //joinColumns = @JoinColumn(name = "produto_id") = qual o campo do campo da tabela correspondente ao campo do produto chave estrangeira
 //inverseJoinColumns = @JoinColumn(name= "categoria_id") = qual o nome da outra chave estrangeira que vai referencia a categoria
+//@JsonBackReference = do outro lado da associaçao ja foram buscados os objetos, eu nao busco mais
