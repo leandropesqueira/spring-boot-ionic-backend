@@ -23,8 +23,8 @@ public class CategoriaResource {
 	private CategoriaService service;	
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {			
-		Categoria obj = service.buscar(id);		
+	public ResponseEntity<Categoria> find(@PathVariable Integer id) {			
+		Categoria obj = service.find(id);		
 		return ResponseEntity.ok().body(obj);
 	}
 	
@@ -36,11 +36,20 @@ public class CategoriaResource {
 		
 		return ResponseEntity.created(uri).build();
 	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id){
+		obj.setId(id);
+		obj = service.update(obj);
+		
+		return ResponseEntity.noContent().build();		
+	}
+	
 }
-
 
 //ResponseEntity encapsula/armazena varias informacoes de um resposta http para um servico Rest
 //Autowired instancia automaticamente o objeto
 //para saber que o id da url vai vir para o id da variável usa-se a anotacao pathvarible
 // endpoint de um web service é a URL onde seu serviço pode ser acessado por uma aplicação cliente
 //obter dados usa-se get / o endpoint desse metodo agora vai ser /categorias/algum id que for passado
+//@RequestBody Categoria obj - faz com que o objeto Json seja convertido para o objeto java
