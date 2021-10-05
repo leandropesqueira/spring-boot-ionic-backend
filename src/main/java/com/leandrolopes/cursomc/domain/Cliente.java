@@ -14,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.leandrolopes.cursomc.domain.enums.TipoCliente;
 
@@ -25,7 +24,8 @@ public class Cliente implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+	private Integer id;	
+	
 	private String nome;
 	private String email;
 	private String cpfOuCnpj;
@@ -52,7 +52,7 @@ public class Cliente implements Serializable {
 		this.nome = nome;
 		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
-		this.tipo = tipo.getCod();
+		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 
 	public Integer getId() {
@@ -134,8 +134,7 @@ public class Cliente implements Serializable {
 			return false;
 		Cliente other = (Cliente) obj;
 		return Objects.equals(id, other.id);
-	}
-
-		
+	}	
 	
 }
+//(tipo == null) ? null : tipo.getCod() = operador ternario - se tipo == null será atribuido nulo senao recebe o tipo
