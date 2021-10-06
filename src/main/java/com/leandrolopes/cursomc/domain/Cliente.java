@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -32,7 +33,7 @@ public class Cliente implements Serializable {
 	private Integer tipo;
 	
 	
-	@OneToMany(mappedBy="cliente")
+	@OneToMany(mappedBy="cliente", cascade=CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 	
 	@ElementCollection
@@ -138,3 +139,4 @@ public class Cliente implements Serializable {
 	
 }
 //(tipo == null) ? null : tipo.getCod() = operador ternario - se tipo == null será atribuido nulo senao recebe o tipo
+//@OneToMany(mappedBy="cliente", cascade=CascadeType.ALL) - apagar em cascata. O JPA ja faz a regra no BD
