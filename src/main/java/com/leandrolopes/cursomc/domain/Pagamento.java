@@ -36,7 +36,7 @@ public abstract class Pagamento implements Serializable {
 	public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {
 		super();
 		this.id = id;
-		this.estado = estado.getCod();
+		this.estado = (estado == null) ? null : estado.getCod();
 		this.pedido = pedido;
 	}
 
@@ -89,4 +89,5 @@ public abstract class Pagamento implements Serializable {
 	@MapsId // garante que o id do pagamento seja o mesmo do pedido
 	@Inheritance(strategy = InheritanceType.JOINED) - mapeamento de herança
 	public abstract class Pagamento implements Serializable - Abstract garante que nao consegue estanciar objeto tipo Pagamento
+	(estado == null) ? null : estado.getCod() - expressão condicional ternária
 */
